@@ -38,10 +38,16 @@ iowa <- county_data %>%
   group_by(date)%>%
   summarize(confirmed=sum(cases),
             fatalities=sum(deaths))
+iowa.new <- iowa %>%
+  mutate(NEW= confirmed- lag(confirmed))
+
 ggplot(iowa, aes(date,confirmed))+
   geom_line()
 ggplot(iowa,aes(date,fatalities))+
   geom_line()
+ggplot(iowa.new, aes(date,NEW))+
+  geom_line()
+
 ##
 # add rates
 # get population data
